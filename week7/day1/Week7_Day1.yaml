@@ -1,0 +1,54 @@
+## Java Keywords
+
+static Keyword:
+    Definition:
+        The static keyword in Java is used to indicate that a method or variable belongs to the class, rather than instances of the class. Static members can be accessed without creating an object of the class.
+
+this Keyword:
+    Definition:
+        In Java, this is a reference to the current instance of the class. It is used to differentiate between instance variables and method parameters or to invoke constructors within the same class.
+
+super Keyword:
+    Definition:
+        In Java, super is a reference to the parent class. It is used to call parent class methods, variables, or constructors, allowing access to the superclass’s members.
+
+final Keyword:
+    Definition:
+        The final keyword in Java is used to declare constants, prevent method overriding, or restrict inheritance. When applied to variables, their values cannot be changed. When applied to methods, they cannot be overridden. When applied to classes, they cannot be subclassed.
+
+Constructor:
+    Definition:
+        In Java, a constructor is a special method that is invoked when an object is created. It initializes the object and has the same name as the class. Unlike other methods, constructors do not have a return type.
+
+
+Exceution flow:
+    static block in superclass first and then subClass
+        non static block and constructor from the super class first and then non static block and constructor for subClass
+            main methods
+
+
+
+## POM - Page Object Model (Design Pattern)
+    1. Create a new Project
+    2. Create a 4 packages as base, pages, testcases and utils
+    3. In base package declare the common implementation (browser configuration, start the browser, load the url, close the browser)
+    4. In pages packages design the WebPage for each action as method
+    5. In testcases design the execution flow of the testcase
+    6. In utils package configure the readExcel
+
+##Steps to do POM
+------------------
+    1. Create a class as ProjectSpecificMethod in base package and declare the driver variable globally and then create a methods preCondition() and postCondition() where initilize and close the browser and also use TestNG annotations @BeforeMethod and @AfterMethod
+
+    2. Create a Pages for EachPage in the application under the pages package, and the Each WebPage should inherit ProjectSpecificMethod(Base class)
+
+    3. In the WebPages class create a method for each actions as method and also add the navigation as return type.
+
+    4. Create a testcase under the testcases package and design the flow of the testcase execution and also inherit the projectSpecificMethod in all the testcase class.
+
+## Steps to Implement Parallel Execution using POM(Page Object Model)
+---------------------------------------------------------------------
+    1. Remove the static keyword for driver variable in ProjectSpecificMethod 
+    2. In the testcase class pass the driver variable through Constructor
+    3. Create a Constructor for each page and inside the Constructor write as this.driver = driver, Which helps to pass the local driver variable value to Global driver variable.
+    4. Create a xml and config parallel Execution.
