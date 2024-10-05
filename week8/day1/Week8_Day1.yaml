@@ -1,0 +1,42 @@
+   ## Steps to Implement ThreadLocal for driver variable
+   -----------------------------------------------------
+
+   1. Remove/comment the driver global declaration
+   2. Create an object for ThreadLocal<RemoteWebDriver> as private static final
+   3. Create two methods setDriver() and getDriver()
+   4. In the setDriver() Create object for ChromeDriver class and pass the driver reference into the ThreadLocal set() [Eg: rd.set(driver)]
+   5. In the getDriver() return the rd.get() [Eg: return rd.get()]
+   6. In preCondition() remove/comment the driver = new ChromeDriver() and call the setDriver()
+   7. replace the driver varibale with getDriver()
+
+    ## Difference of catch and finally
+    ----------------------------------
+    1. catch block only execute when there is Exception in the try block 
+    2. finally block always execute if there is exception or not
+
+
+    ## Steps to generate ExtentReport
+    ---------------------------------
+    1. Set the file path of the report
+    2. Create an object for ExtentReports class
+    3. Attach the report path
+    4. Create report for the testcase [Eg: extent.createTest() , pass a info like testcase name and testcase description]
+    5. add other infomaration to the testcase author and category
+    6. if node is requires for multi test data execution
+    7. add the pass/fail status for test steps
+    8. generate the report [Eg: extent.flush()]
+
+
+    TestNG Annotation Flow
+    ----------------------
+    BeforeSuite --> startReport
+        BeforeTest --> setDetails
+            BeforeClass --> CreateReportForTestCase
+                DataProvider --> Read test data from Excel and provide multi test data
+                    BeforeMethod --> preCondition
+                        Test --> Testcase
+                    AfterMethod --> postCondition
+            AfterClass
+        AfterTest
+    AfterSuite --> endReport
+
